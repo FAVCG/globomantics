@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import Header from './header';
+import FeaturedHouse from './featured-house';
+
 
 //this is a class component
 //Support state and lifecycle methods. 
@@ -11,10 +13,14 @@ class App extends Component {
   //   this.state = {};
   // }
 
-  state = {}
+  state = {} 
+
+  componentDidMount() {
+    this.fetchHouse();
+  }
 
   fetchHouse = () => {
-    fetch('/house.json')
+    fetch('/houses.json')
     .then(rsp => rsp.json())
     .then(allHouses => {
       this.allHouses = allHouses;
@@ -22,7 +28,7 @@ class App extends Component {
     })
   }
  //This picks a random house from the list of houses.
-  detrmineFeaturedHouse = () => {
+  determineFeaturedHouse = () => {
     if (this.allHouses) {
       const randomIndex = Math.floor(Math.random() * this.allHouses.length);
       const featuredHouse = this.allHouses[randomIndex];
@@ -36,6 +42,7 @@ class App extends Component {
     return (
      <div className="container">
        <Header subtitle="Providing houses all over the world."/>
+       <FeaturedHouse house={this.state.featuredHouse}/>
      </div>
     );
   }
