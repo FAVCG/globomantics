@@ -8,10 +8,11 @@ class App extends Component {
   render() {
     return (
      <div className="container">
-       <Header/>
+       <Header subtitle="Providing houses all over the world."/>
      </div>
     );
   }
 }
 
 export default App;
+
